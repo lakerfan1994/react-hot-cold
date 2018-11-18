@@ -4,7 +4,7 @@ import './info-section.css';
 
 export default function InfoSection(props) {
   return (
-    <section id="what" tabIndex="-1">
+    <section className='what' id="what" tabIndex="-1">
       <h2>What do I do?</h2>
       <p>This is a Hot or Cold Number Guessing Game. The game goes like this:</p>
       <ol>
