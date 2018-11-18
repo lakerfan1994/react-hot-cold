@@ -2,6 +2,13 @@ language: node_js
 node_js: node
 cache:
   directories:
-    - node_modules
+  - node_modules
 env:
-  - CI=true
+- CI=true
+deploy:
+  provider: heroku
+  api_key:
+    secure: fh5wjLXglArI2QjNZFTZU/1AEuLqvVQdzYoZ8jnwRowcNOuEfW59c+U38Bdo/f21/6G9r5TiWz1rPbl9PhdlCvGdumnaxBveD1y85ijR1DAtho29E9JyqnUbmlsOct2C+31Opov3oHamjI3WswNvmK333rg1immdu+ZgZ60N9xIaCzxN7fPADVOGYy4UgNh2Be2h8yMTIQ8RNuUbkmf56hLzUo1mdFkI5dChaLCZAopqiq6LFVwkyVvqqz91dreiU+bELErsPpIq11xFkr0QMxoGUzoZj8Q6ANagP9Rvo1HhQYqIP2lzEt/NPMVm6Ig5BiKmds0wm0rsSUiFAOFFIextOUpoXAcNsdW5J0xrFd8WQtlnIU6OahEVnbBOi/5bMmc/sDJS6QJCM6wz4ghFh2RX7k3XIp9dx7LexCz0KRyNoKcCtNnV4m4HKucSIeh2gHR4jmlCAXqHQeI/UR4H9wHKksrOAq64LvWX+z8N0eMoVik/vw1JzCrNrmixfMZRLTPSzQavx/pa2Bl3KL0cHR6gImJa9vvr2LJwtCBHBW5oFsZWyyP91zyNq+GR8Ynuq/3brLRk7ZOCnTkgxZZhbymw0txaj7EskGJnowZlO515r1CHHvpI+B0owP2Uk26idl4jJ3i5LH2hFoaW+6mllp1QKoTZ67zT6XImijXluKo=
+  app: tranquil-depths-85161
+  on:
+    repo: lakerfan1994/react-hot-cold
