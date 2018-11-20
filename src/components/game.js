@@ -1,20 +1,14 @@
 import React from 'react';
+import {connect} from 'react-redux'
 
 import Header from './header';
 import GuessSection from './guess-section';
 import StatusSection from './status-section';
 import InfoSection from './info-section';
+import * as actions from '../actions';
 
-export default class Game extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      guesses: [],
-      feedback: 'Make your guess!',
-      auralStatus: '',
-      correctAnswer: Math.floor(Math.random() * 100) + 1
-    };
-  }
+export class Game extends React.Component {
+
 
   restartGame() {
     this.setState({
@@ -28,11 +22,10 @@ export default class Game extends React.Component {
   makeGuess(guess) {
     guess = parseInt(guess, 10);
     if (isNaN(guess)) {
-      this.setState({ feedback: 'Please enter a valid number' });
-      return;
+        this.props.dispatch(actions.setFeedBack('Please enter an actual number'));
     }
 
-    const difference = Math.abs(guess - this.state.correctAnswer);
+    const difference = Math.abs(guess - this.props.correctAnswer);
 
     let feedback;
     if (difference >= 50) {
@@ -47,10 +40,11 @@ export default class Game extends React.Component {
       feedback = 'You got it!';
     }
 
-    this.setState({
-      feedback,
-      guesses: [...this.state.guesses, guess]
-    });
+    this.props.dispatch(actions.addGuess(guess));
+    this.props.dispatch(actions.setFeedBack(feedback));
+    
+     // guesses: [...this.state.guesses, guess]
+  
 
     // We typically wouldn't touch the DOM directly like this in React
     // but this is the best way to update the title of the page,
@@ -77,8 +71,10 @@ export default class Game extends React.Component {
   }
 
   render() {
-    const { feedback, guesses, auralStatus } = this.state;
+    const {feedback, guesses, auralStatus } = this.props;
     const guessCount = guesses.length;
+    console.log(guessCount);
+    console.log(guesses);
 
     return (
       <div>
@@ -101,3 +97,12 @@ export default class Game extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  guesses: state.guesses,
+  feedback: state.feedback,
+  auralStatus: state.auralStatus,
+  correctAnswer: state.correctAnswer
+});
+
+export default connect(mapStateToProps)(Game);
